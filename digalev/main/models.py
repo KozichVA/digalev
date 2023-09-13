@@ -36,9 +36,11 @@ class Service(models.Model):
 class Equipment(models.Model):
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE,
                                  db_index=True,  verbose_name='категория')
-    name = models.CharField(max_length=24, unique=True, blank=False, null=False)
-    description = models.CharField(max_length=512)
-    picture = models.ImageField(upload_to='static/img', max_length=255)
+    name = models.CharField(max_length=24, unique=True, blank=False,
+                            null=False, verbose_name='имя')
+    description = models.CharField(max_length=512, verbose_name='описание')
+    model = models.CharField(max_length=24, blank=True, null=True, verbose_name='модель станка',)
+    picture = models.ImageField(upload_to='static/img', max_length=255, verbose_name='фото')
     slug = models.SlugField(max_length=24)
 
     def __str__(self):
@@ -52,9 +54,10 @@ class Equipment(models.Model):
 class CompletedWorks(models.Model):
     category = models.ForeignKey(to='Category', on_delete=models.CASCADE,
                                  db_index=True, verbose_name='категория')
-    name = models.CharField(max_length=24, unique=True, blank=False, null=False)
-    description = models.CharField(max_length=512)
-    picture = models.ImageField(upload_to='static/img', max_length=255)
+    name = models.CharField(max_length=24, unique=True, blank=False,
+                            null=False, verbose_name='название')
+    description = models.CharField(max_length=512, verbose_name='описание')
+    picture = models.ImageField(upload_to='static/img', max_length=255, verbose_name='картинка')
     slug = models.SlugField(max_length=24)
 
     def __str__(self):
