@@ -5,6 +5,7 @@ from django.utils.timezone import now
 class Category(models.Model):
     name = models.CharField(max_length=24, unique=True, blank=False, null=False)
     description = models.CharField(max_length=512)
+    picture = models.ImageField(upload_to='category/', max_length=255)
     slug = models.SlugField(max_length=24, unique=True)
 
     def __str__(self):
@@ -21,7 +22,7 @@ class Service(models.Model):
     name = models.CharField(max_length=24, unique=True, blank=False,
                             null=False, verbose_name='название')
     description = models.CharField(max_length=512)
-    picture = models.ImageField(upload_to='static/img', max_length=255)
+    picture = models.ImageField(upload_to='service/', max_length=255)
     slug = models.SlugField(max_length=24)
     is_published = models.BooleanField(default=False, verbose_name='опубликовать на главной')
 
@@ -40,7 +41,7 @@ class Equipment(models.Model):
                             null=False, verbose_name='имя')
     description = models.CharField(max_length=512, verbose_name='описание')
     model = models.CharField(max_length=24, blank=True, null=True, verbose_name='модель станка',)
-    picture = models.ImageField(upload_to='static/img', max_length=255, verbose_name='фото')
+    picture = models.ImageField(upload_to='equipment/', max_length=255, verbose_name='фото')
     slug = models.SlugField(max_length=24)
 
     def __str__(self):
@@ -57,7 +58,7 @@ class CompletedWorks(models.Model):
     name = models.CharField(max_length=24, unique=True, blank=False,
                             null=False, verbose_name='название')
     description = models.CharField(max_length=512, verbose_name='описание')
-    picture = models.ImageField(upload_to='static/img', max_length=255, verbose_name='картинка')
+    picture = models.ImageField(upload_to='completed_works/', max_length=255, verbose_name='картинка')
     slug = models.SlugField(max_length=24)
 
     def __str__(self):
@@ -89,7 +90,7 @@ class Order(models.Model):
     user = models.ForeignKey(to='User', on_delete=models.CASCADE,
                              db_index=True, verbose_name='клиент')
     description = models.CharField(max_length=512, verbose_name='описание')
-    plan_file = models.FileField(upload_to='uploads/',  blank=True,
+    plan_file = models.FileField(upload_to='order/',  blank=True,
                                  null=True, verbose_name='чертеж')
     price = models.DecimalField(max_digits=5, decimal_places=2,  blank=True, null=True,)
     production_time = models.DateField(blank=True, null=True,)

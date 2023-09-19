@@ -1,16 +1,16 @@
 {% load static %}
 <!-- Project Start -->
-<div class="container-fluid bg-dark pt-5 my-5 px-0">
-    <div class="text-center mx-auto mt-5 wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
+<div class="container-fluid py-5 my-5 px-0">
+    <div class="text-center mx-auto wow fadeIn" data-wow-delay="0.1s" style="max-width: 600px;">
         <p class="fw-medium text-uppercase text-primary mb-2">Наши работы</p>
-        <h1 class="display-5 text-white mb-5">Выполненные заказы</h1>
+        <h1 class="display-5 mb-5">Выполненные заказы</h1>
     </div>
-    <div class="owl-carousel project-carousel wow fadeIn" data-wow-delay="0.1s">
-        {% for completed_work in object_list%}
+    <div class="owl-carousel project-carousel bg-dark wow fadeIn" data-wow-delay="0.1s">
+        {% for obj in completed_list %}
         <a class="project-item" href="">
-            <img class="img-fluid" src="{% static 'img/project-1.jpg'%}" alt="">
+            <img class="img-fluid" src="{{ obj.picture.url }}" alt="">
             <div class="project-title">
-                <h5 class="text-primary mb-0">{{completed_work.name}}</h5>
+                <h5 class="text-primary mb-0">{{ obj.name }}</h5>
             </div>
         </a>
         {% endfor %}
