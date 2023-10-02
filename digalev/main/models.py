@@ -43,6 +43,8 @@ class Equipment(models.Model):
     model = models.CharField(max_length=24, blank=True, null=True, verbose_name='модель станка',)
     picture = models.ImageField(upload_to='equipment/', max_length=255, verbose_name='фото')
     slug = models.SlugField(max_length=24)
+    is_published = models.BooleanField(default=False, verbose_name='опубликовать на главной')
+
 
     def __str__(self):
         return self.name

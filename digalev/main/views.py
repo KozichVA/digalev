@@ -13,7 +13,7 @@ class MainListView(ListView):
         context = super().get_context_data()
         context['page_name'] = 'Главная страница'
         context['carousel_items'] = Service.objects.all().filter(is_published=True)
-        context['equipments_list'] = Equipment.objects.all()
+        context['equipments_list'] = Equipment.objects.all().filter(is_published=True)
         context['category_list'] = Category.objects.all()
         context['completed_list'] = CompletedWorks.objects.all()
         context['service_list'] = Service.objects.all()
@@ -58,7 +58,12 @@ class ServiceView(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context['page_name'] = 'Услуги'
+        context['category_list'] = Category.objects.all()
         return context
+
+    def get_queryset(self):
+        objs = Service.objects.all()
+        return objs
 
 
 class ProjectCompletedView(ListView):
